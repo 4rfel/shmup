@@ -4,7 +4,28 @@ using UnityEngine;
 
 public class PlayerController : SteerableBehaviour, IShooter, IDamageable
 {
-  
+    private int vidas = 10;
+
+    private Animator animator;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+        float yInput = Input.GetAxis("Vertical");
+        float xInput = Input.GetAxis("Horizontal");
+        Thrust(xInput, yInput);
+        if (yInput != 0 || xInput != 0)
+        {
+            animator.SetFloat("Vel", 1.0f);
+        }
+        else
+        {
+            animator.SetFloat("Vel", 0.0f);
+        }
+    }
 
     public void Shoot()
     {
@@ -13,7 +34,8 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
 
     public void TakeDamage()
     {
-        throw new System.NotImplementedException();
+        vidas--;
+        //throw new System.NotImplementedException();
     }
 
     public void Die()
@@ -21,18 +43,11 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         Destroy(gameObject);
     }
 
-    void FixedUpdate()
-    {
-        float yInput = Input.GetAxis("Vertical");
-        float xInput = Input.GetAxis("Horizontal");
-        Thrust(xInput, yInput);
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            Destroy(col.gameObject);
             TakeDamage();
         }
     }
