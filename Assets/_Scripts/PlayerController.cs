@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : SteerableBehaviour, IShooter, IDamageable
 {
-    private int vidas = 10;
+    private int hp;
 
     private Animator animator;
     private void Start()
     {
         animator = GetComponent<Animator>();
+        hp = 10;
     }
 
     void FixedUpdate()
@@ -25,17 +26,31 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         {
             animator.SetFloat("Vel", 0.0f);
         }
+
+        if (Input.GetAxisRaw("Jump") != 0) {
+            Shoot();
+        }
     }
 
-    public void Shoot()
-    {
-        throw new System.NotImplementedException();
+    public GameObject bullet;
+    public Transform weapon0;
+    public float shootDelay = 1.0f;
+    private float _lastShootTimestamp = 0.0f;
+    public AudioClip shootSFX;
+
+    public void Shoot() {
+        if (Time.time - _lastShootTimestamp < shootDelay)
+            return;
+        _lastShootTimestamp = Time.time;
+
+        Instantiate(bullet, weapon0.position, Quaternion.identity);
+        AudioManager.PlaySFX(shootSFX);
     }
 
-    public void TakeDamage()
-    {
-        vidas--;
-        //throw new System.NotImplementedException();
+    public void TakeDamage() {
+        hp--;
+        if (hp <= 0)
+            Die();
     }
 
     public void Die()

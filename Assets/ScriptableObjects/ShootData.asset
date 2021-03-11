@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bd0508195ad2f24c9ae504ff69c94d1, type: 3}
-  m_Name: ThrustEnemy
+  m_Name: Shoot
   m_EditorClassIdentifier: 
-  thrustIntensity: {x: 2, y: 2}
+  thrustIntensity: {x: 0, y: 0}
