@@ -7,8 +7,11 @@ public class ShotEnemyBehaviour : SteerableBehaviour {
     private Vector3 direction;
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy")) {
+            Debug.Log("AAAAA");
             return;
+        }
+        Debug.Log("BBBBB");
 
         IDamageable damageable = collision.gameObject.GetComponent(typeof(IDamageable)) as IDamageable;
         if (!(damageable is null)) {

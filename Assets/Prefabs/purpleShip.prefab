@@ -512,7 +512,6 @@ GameObject:
   - component: {fileID: 7793775955640000207}
   - component: {fileID: 7793775955640000208}
   - component: {fileID: 7793775955640000209}
-  - component: {fileID: 7793775955640000210}
   m_Layer: 0
   m_Name: purpleShip
   m_TagString: Enemy
@@ -713,19 +712,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3087734, y: 0.8361836}
   m_EdgeRadius: 0
---- !u!114 &7793775955640000210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7793775955640000200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a4fe822c6859d4fa8d9e38d14e7866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  td: {fileID: 11400000, guid: 9d837a364c9561241b6dbac116b10c0e, type: 2}
 --- !u!1 &7793775955690525133
 GameObject:
   m_ObjectHideFlags: 0

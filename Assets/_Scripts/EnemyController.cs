@@ -26,9 +26,10 @@ public class EnemyController : SteerableBehaviour, IShooter, IDamageable
        
     }
 
-    public GameObject tiro;
+    public GameObject bullet;
+    public Transform weapon0;
 
     public void Shoot() {
-        Instantiate(tiro, transform.position, Quaternion.identity);
+        Instantiate(bullet, weapon0.position, Quaternion.identity);
     }
 }
