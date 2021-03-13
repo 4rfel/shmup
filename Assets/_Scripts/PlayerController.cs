@@ -1,20 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : SteerableBehaviour, IShooter, IDamageable
 {
     private int hp;
+
+    private Vector3 startP;
 
     private Animator animator;
     private void Start()
     {
         animator = GetComponent<Animator>();
         hp = 10;
+        startP = transform.position;
+        Debug.Log(startP);
     }
 
     void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) Pause();
+
         float yInput = Input.GetAxis("Vertical");
         float xInput = Input.GetAxis("Horizontal");
         Thrust(xInput, yInput);
@@ -53,9 +60,36 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
             Die();
     }
 
+    [SerializeField] private GameObject gameover_menu;
+
     public void Die()
     {
-        Destroy(gameObject);
+        gameover_menu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        hp = 10;
+        transform.position = startP;
+        gameover_menu.SetActive(false);
+    }
+
+    [SerializeField] private GameObject pause_menu;
+
+    public void Pause()
+    {
+        if (Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
+            pause_menu.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            pause_menu.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)

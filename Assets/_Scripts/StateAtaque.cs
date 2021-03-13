@@ -12,7 +12,7 @@ public class StateAtaque : State {
         Transition ToPatrulha = new Transition();
         ToPatrulha.condition = new ConditionDistGT(transform,
             GameObject.FindWithTag("Player").transform,
-            2.0f);
+            5.0f);
         ToPatrulha.target = GetComponent<StatePatrulha>();
         // Adicionamos a transição em nossa lista de transições
         transitions.Add(ToPatrulha);
@@ -30,7 +30,15 @@ public class StateAtaque : State {
 
     public override void Update() {
 
-        //TODO: Movimentação quando atacando
+        Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
+        Vector3 direction = (posPlayer - transform.position);
+        Debug.Log(direction);
+
+
+        Vector3 diff = Camera.main.ScreenToWorldPoint(direction) - transform.position;
+
+        float rot_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
 
         if (Time.time - _lastShootTimestamp < shootDelay)
             return;

@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class ShotBehaviour : SteerableBehaviour {
 
+    private float dist;
+
+    void Start()
+    {
+        dist = 0;
+    }
+
     private void Update() {
         Thrust(1, 0);
+        dist += 1;
+        if (dist >= 80)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

@@ -23,7 +23,7 @@ public class EnemyController : SteerableBehaviour, IShooter, IDamageable
         float y = Mathf.Cos(angle);
 
         Thrust(x, y);
-       
+
     }
 
     public GameObject bullet;
