@@ -10,21 +10,37 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
     private Vector3 startP;
 
     private Animator animator;
+
+    private Rigidbody2D rba;
+
+
     private void Start()
     {
         animator = GetComponent<Animator>();
         hp = 10;
         startP = transform.position;
-        Debug.Log(startP);
+        rba = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) Pause();
 
+        Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
+
+
         float yInput = Input.GetAxis("Vertical");
         float xInput = Input.GetAxis("Horizontal");
-        Thrust(xInput, yInput);
+
+        Vector2 dir = new Vector2(diff.x, diff.y);
+        dir = dir.normalized;
+
+        dir = dir * yInput * 700;
+
+        rba.AddForce(dir);
         if (yInput != 0 || xInput != 0)
         {
             animator.SetFloat("Vel", 1.0f);
@@ -51,7 +67,7 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         _lastShootTimestamp = Time.time;
 
         Instantiate(bullet, weapon0.position, Quaternion.identity);
-        AudioManager.PlaySFX(shootSFX);
+        AudioManager.PlaySFX(shootSFX, 0.2f);
     }
 
     public void TakeDamage() {
@@ -68,8 +84,11 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         Time.timeScale = 0;
     }
 
+    [SerializeField] private HUD hud;
+
     public void Restart()
     {
+        hud.Restart();
         Time.timeScale = 1;
         hp = 10;
         transform.position = startP;
@@ -101,5 +120,8 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         }
     }
 
-
+    public int GetHP()
+    {
+        return hp;
+    }
 }

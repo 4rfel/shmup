@@ -5,20 +5,24 @@ using UnityEngine;
 public class ShotBehaviour : SteerableBehaviour {
 
     private float dist;
+    private Vector3 direction;
 
     void Start()
     {
         dist = 0;
+        Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
+        direction = (transform.position - posPlayer).normalized;
     }
 
     private void Update() {
-        Thrust(1, 0);
+        Thrust(direction.x, direction.y);
         dist += 1;
         if (dist >= 80)
         {
             Destroy(gameObject);
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player"))

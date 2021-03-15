@@ -6,15 +6,17 @@ public class StateAtaque : State {
     SteerableBehaviour steerable;
     IShooter shooter;
 
+    [SerializeField] private ChangeStateDist csd;
+
     public override void Awake() {
         base.Awake();
 
         Transition ToPatrulha = new Transition();
         ToPatrulha.condition = new ConditionDistGT(transform,
             GameObject.FindWithTag("Player").transform,
-            5.0f);
+            csd.dist);
         ToPatrulha.target = GetComponent<StatePatrulha>();
-        // Adicionamos a transição em nossa lista de transições
+
         transitions.Add(ToPatrulha);
 
 
@@ -32,8 +34,6 @@ public class StateAtaque : State {
 
         Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
         Vector3 direction = (posPlayer - transform.position);
-        Debug.Log(direction);
-
 
         Vector3 diff = Camera.main.ScreenToWorldPoint(direction) - transform.position;
 

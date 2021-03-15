@@ -16,9 +16,9 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public static void PlaySFX(AudioClip audioClip) {
+    public static void PlaySFX(AudioClip audioClip, float volume) {
+        _instance.sfxSource.volume = volume;
         _instance.sfxSource.PlayOneShot(audioClip);
-        Debug.Log("A");
     }
 
     public static void SetAmbience(AudioClip audioClip) {

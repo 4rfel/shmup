@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class EnemyController : SteerableBehaviour, IShooter, IDamageable
 {
-    public void TakeDamage() {
-        Die();
+    private int hp;
+    private HUD hud;
+
+    void Start()
+    {
+        hp = 3;
     }
 
+    public void setHUD(HUD h)
+    {
+        hud = h;
+    }
+
+    public void TakeDamage() {
+        hp--;
+        if(hp <= 0)
+        {
+            Die();
+        }
+    }
+    
     public void Die()
     {
+        hud.points += 10;
         Destroy(gameObject);
-    }
-
-    float angle = 0;
-
-    private void FixedUpdate()
-    {
-        angle += 0.1f;
-        Mathf.Clamp(angle, 0.0f, 2.0f * Mathf.PI);
-        float x = Mathf.Sin(angle);
-        float y = Mathf.Cos(angle);
-
-        Thrust(x, y);
-
     }
 
     public GameObject bullet;

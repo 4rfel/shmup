@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6693553254465341792}
   - component: {fileID: 6693553254465341795}
   m_Layer: 0
-  m_Name: tiro
-  m_TagString: Untagged
+  m_Name: bullet
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0eb3a96f9547b8468e8837e9b4da6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  td: {fileID: 11400000, guid: 2ce202eaedd88034f8fe07f3afed4a09, type: 2}
+  td: {fileID: 11400000, guid: 152dab83caafe084780335bfa16c7655, type: 2}

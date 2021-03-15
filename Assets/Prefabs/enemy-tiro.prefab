@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1586427784752181307}
   m_Layer: 0
   m_Name: enemy-tiro
-  m_TagString: Enemy
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9084748516344082925}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   td: {fileID: 11400000, guid: 2ce202eaedd88034f8fe07f3afed4a09, type: 2}
+  csd: {fileID: 11400000, guid: 4de12012d69c91e478da590691e21c10, type: 2}
