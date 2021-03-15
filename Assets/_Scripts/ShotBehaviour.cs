@@ -16,8 +16,11 @@ public class ShotBehaviour : SteerableBehaviour {
 
     private void Update() {
         Thrust(direction.x, direction.y);
-        dist += 1;
-        if (dist >= 80)
+        if (Time.timeScale == 1)
+        {
+            dist += 1;
+        }
+        if (dist >= 150)
         {
             Destroy(gameObject);
         }

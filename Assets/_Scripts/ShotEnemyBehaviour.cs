@@ -27,7 +27,10 @@ public class ShotEnemyBehaviour : SteerableBehaviour {
 
     void Update() {
         Thrust(direction.x, direction.y);
-        dist += direction.magnitude;
+        if(Time.timeScale == 1)
+        {
+            dist += direction.magnitude;
+        }
         if (dist >= 300)
         {
             Destroy(gameObject);
