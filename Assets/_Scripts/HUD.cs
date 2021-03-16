@@ -12,13 +12,16 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
-        points = 0;
-        timer = 0;
+        Restart();
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
+        timer -= Time.deltaTime;
+        if(timer <= 0)
+        {
+            pc.Die();
+        }
         txt_hp.text = $"HP {pc.GetHP()}";
         txt_timer_points.text = $"{points}  {timer.ToString("F3")}s";
     }
@@ -26,6 +29,11 @@ public class HUD : MonoBehaviour
     public void Restart()
     {
         points = 0;
-        timer = 0;
+        ResetTimer();
+    }
+
+    public void ResetTimer()
+    {
+        timer = 20;
     }
 }

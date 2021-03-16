@@ -9,7 +9,7 @@ public class EnemyController : SteerableBehaviour, IShooter, IDamageable
 
     void Start()
     {
-        hp = 3;
+        hp = 2;
     }
 
     public void setHUD(HUD h)
@@ -28,6 +28,7 @@ public class EnemyController : SteerableBehaviour, IShooter, IDamageable
     public void Die()
     {
         hud.points += 10;
+        hud.ResetTimer();
         Destroy(gameObject);
     }
 

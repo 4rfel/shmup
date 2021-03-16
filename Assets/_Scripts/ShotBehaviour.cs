@@ -20,7 +20,7 @@ public class ShotBehaviour : SteerableBehaviour {
         {
             dist += 1;
         }
-        if (dist >= 150)
+        if (dist >= 400)
         {
             Destroy(gameObject);
         }
